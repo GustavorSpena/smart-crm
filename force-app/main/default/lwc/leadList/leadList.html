@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Leads" icon-name="standard:lead">
+        <div slot="actions">
+            <lightning-button
+            label="Novo Lead"
+            onclick={handleNew}>
+            </lightning-button>
+        </div>
+        <div class="slds-p-around_medium">
+            <template if:true={leads.data}>
+                <template for:each={leads.data} for:item="lead">
+                     <div key={lead.Id} class="slds-box slds-m-bottom_small">
+
+                        <div class="slds-grid slds-gutters slds-grid_vertical-align-center">
+
+                            <!-- Info do lead -->
+                            <div class="slds-col">
+                                <p class="slds-text-heading_small">{lead.Name}</p>
+                                <p class="slds-text-color_weak">{lead.Company}</p>
+                                <p class="slds-text-color_weak">{lead.Email}</p>
+                            </div>
+
+                            <!-- Score -->
+                            <div class="slds-col slds-size_1-of-4 slds-text-align_right">
+                                <span class={lead.scoreClass}>
+                                    Score: {lead.Score__c}
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

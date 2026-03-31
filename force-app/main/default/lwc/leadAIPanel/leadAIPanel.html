@@ -1,0 +1,71 @@
+<template>
+
+    <lightning-card title="Inteligência Artificial" icon-name="standard:einstein">
+        <div class="slds-p-around_medium">
+
+            <!-- Score -->
+            <div class="slds-m-bottom_medium">
+                <p class="slds-text-title_caps slds-m-bottom_xx-small">Score</p>
+                <div class="slds-grid slds-grid_vertical-align-center slds-gutters">
+                    <div class="slds-col">
+                        <lightning-progress-bar
+                            value={score}
+                            size="large">
+                        </lightning-progress-bar>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-text-align_right">
+                        <span class="slds-badge">{score}/100</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sugestão da IA -->
+            <template if:true={suggestion}>
+                <div class="slds-m-bottom_medium">
+                    <p class="slds-text-title_caps slds-m-bottom_xx-small">Sugestão</p>
+                    <div class="slds-box slds-theme_shade">
+                        <p>{suggestion}</p>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Email Draft -->
+            <template if:true={emailDraft}>
+                <div class="slds-m-bottom_medium">
+                    <p class="slds-text-title_caps slds-m-bottom_xx-small">Rascunho de Email</p>
+                    <div class="slds-box slds-theme_shade">
+                        <p class="slds-text-longform">{emailDraft}</p>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-button
+                            variant="brand"
+                            label="Copiar Email"
+                            icon-name="utility:copy"
+                            onclick={handleCopyEmail}>
+                        </lightning-button>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-button
+                            variant="success"
+                            label="Abrir no Email"
+                            icon-name="utility:email"
+                            onclick={handleOpenEmail}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </template>
+
+            <!-- Sem dados ainda -->
+            <template if:false={suggestion}>
+                <div class="slds-illustration slds-illustration_small">
+                    <p class="slds-text-color_weak">
+                        Salve o lead para gerar sugestões da IA.
+                    </p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

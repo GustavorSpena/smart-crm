@@ -1,0 +1,68 @@
+<template>
+    <div class="dashboard">
+
+        <!-- KPIs -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <p class="kpi-label">Total de Leads</p>
+                <p class="kpi-value">{totalLeads}</p>
+            </div>
+            <div class="kpi-card">
+                <p class="kpi-label">Leads Hoje</p>
+                <p class="kpi-value">{leadsToday}</p>
+            </div>
+            <div class="kpi-card">
+                <p class="kpi-label">Score Médio</p>
+                <p class="kpi-value">{avgScore}</p>
+            </div>
+            <div class="kpi-card kpi-hot">
+                <p class="kpi-label">🔥 Leads Quentes</p>
+                <p class="kpi-value">{hotLeadsCount}</p>
+            </div>
+        </div>
+
+        <!-- Grid: Gráfico + Leads Quentes -->
+        <div class="content-grid">
+
+            <!-- Gráfico de Pizza -->
+            <div class="section">
+                <h2 class="section-title">📊 Leads por Status</h2>
+                <div class="chart-container">
+                    <canvas class="chart-canvas"></canvas>
+                </div>
+            </div>
+
+            <!-- Leads Quentes -->
+            <div class="section">
+                <h2 class="section-title">🔥 Top Leads por Score</h2>
+                <template if:true={hotLeads.length}>
+                    <template for:each={hotLeads} for:item="lead">
+                        <div key={lead.Id} class="lead-card">
+                            <div class="lead-info">
+                                <p class="lead-name">{lead.Name}</p>
+                                <p class="lead-company">{lead.Company}</p>
+                                <p class="lead-suggestion">{lead.AI_Suggestion__c}</p>
+                            </div>
+                            <div class="lead-score">
+                                <div class="score-circle">
+                                    <span>{lead.Score__c}</span>
+                                </div>
+                                <lightning-button
+                                    label="Ver"
+                                    onclick={handleViewLead}
+                                    data-id={lead.Id}
+                                    variant="base"
+                                    size="small">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={hotLeads.length}>
+                    <p class="empty-state">Nenhum lead quente ainda.</p>
+                </template>
+            </div>
+
+        </div>
+    </div>
+</template>
