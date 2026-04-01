@@ -5,15 +5,15 @@ public class LeadScoreHandler {
 
             // ── VALIDAÇÕES ────────────────────────────────
             if (String.isBlank(ld.Email)) {
-                ld.addError('Email é obrigatório para cadastrar um Lead.');
+                ld.addError('Email required');
             }
 
             if (String.isBlank(ld.Company)) {
-                ld.addError('Empresa é obrigatória para cadastrar um Lead.');
+                ld.addError('Company required');
             }
 
             if (!String.isBlank(ld.Email) && !ld.Email.contains('@')) {
-                ld.addError('Email inválido — verifique o formato.');
+                ld.addError('Email format invalid');
             }
 
             // ── SCORE ─────────────────────────────────────
@@ -24,7 +24,7 @@ public class LeadScoreHandler {
             if (!String.isBlank(ld.Website)) score += 10;
 
             if (ld.LeadSource == 'Web')   score += 20;
-            if (ld.LeadSource == 'Word of mouth' || ld.LeadSource == 'Other') score += 30;
+            if (ld.LeadSource == 'Word of mouth' || ld.LeadSource == 'Other' || ld.LeadSource == 'Referral') score += 30;
 
             if (ld.NumberOfEmployees != null && ld.NumberOfEmployees > 100) score += 25;
             if (ld.NumberOfEmployees != null && ld.NumberOfEmployees > 500) score += 10;
